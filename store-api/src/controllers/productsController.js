@@ -11,8 +11,10 @@ export const createProduct = async (req, res) => {
                 msg: "La foto es obligatoria."
             })
         }
+        
         console.log(body)
         console.log(file.filename)
+
         const product = await Products.create({
             ...body,
             imgUrl: `${process.env.BASE_URL}/public/${file.filename}` //Armamos la base url del archivo
@@ -52,10 +54,11 @@ export const getProducts = async (req, res) => {
             products
         })
     } catch (error) {
-        console.log(error); 
-        res.status(500).json({
+        console.log("Ha habido un error al obtener los productos."); 
+        res.status(500)
+          .json({
             ok: false,
-            msg: "Ha habido un error al obtener los productos"
+            msg: "Ha habido un error con el servidor"
         })  //Error interno
     }
 }

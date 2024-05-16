@@ -1,5 +1,5 @@
 import express from "express"
-import upload from "../../libs/storage.js";
+import upload from "../libs/storage.js";
 
 import { createProduct, getProducts } from "../controllers/productsController.js";
 
@@ -10,3 +10,4 @@ route
     .get("/", getProducts)
 
 export default route;
+
