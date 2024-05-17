@@ -30,7 +30,6 @@ export const createProduct = async (req, res) => {
         } 
 
         res.json({
-            ok: true,
             product, //Se crea el producto
             msg: "Se ha creado el producto correctamente"
         })
@@ -50,7 +49,6 @@ export const getProducts = async (req, res) => {
         const products = await Products.find() 
         //Nuestra data del products
         res.json({
-            ok: true,
             products
         })
     } catch (error) {
