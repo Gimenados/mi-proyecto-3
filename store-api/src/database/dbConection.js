@@ -7,6 +7,7 @@ export const dbConection = async () => {
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true, // Aquí estaba el error
+                dbName: "products"
             }
         );
         console.log("Conexión exitosa a la base de datos:", mongoDB.connections[0].name);
