@@ -4,7 +4,7 @@ import { Products } from "../models/Products.js"
 export const createProduct = async (req, res) => {
     const {body, file} = req
     try {
-        if (!file) {
+        if (!file) { //Hay un archivo? si no lo hay retornamos un 400
             return res.status(400)
             .json({
                 ok: false,
@@ -15,9 +15,10 @@ export const createProduct = async (req, res) => {
         console.log(body)
         console.log(file.filename)
 
+        //Para crear el producto 
         const product = await Products.create({
             ...body,
-            imgUrl: `${process.env.BASE_URL}/public/${file.filename}` //Armamos la base url del archivo
+            imgUrl: `${process.env.BASE_URL}/public/${file.filename}` //Armamos la base url del archivo de nuestro producto
         });
 
         //Validar que por si alguna razon no valido nada

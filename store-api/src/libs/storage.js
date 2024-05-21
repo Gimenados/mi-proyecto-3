@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
         console.log(file)
         cb(null, "./temp/imgs") //Donde queremos que guarde nuestras imagenes
     },
-    filename: (req, file, cb) => {
+    filename: (req, file, cb) => { //file viene con varias propiedades de nuestra imagen
         cb(null, `${file.fieldname}-${Date.now()}.png`); //Con que nombre guardarlo
     },    
 
