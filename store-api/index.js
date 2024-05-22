@@ -20,7 +20,7 @@ const api = async () => {
     server.use(cors());
       
     server.use(express.json())
-    server.use('/public', express.static(path.join(__dirname, '/temp/imgs'))) 
+    server.use('/public', express.static(path.join(__dirname, '/temp/imgs'))) //En base al endpoint public sirva los archivos de forma static que estan en la carpeeta temp/imgs
     server.use("/api/products", productsRoutes)
     
     server.listen(process.env.PORT, () => console.log(`Servidor corriendo en el puerto ${process.env.PORT}`))
