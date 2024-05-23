@@ -7,7 +7,6 @@ export const dbConection = async () => {
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true, // Aquí estaba el error
-                // dbName: "products"
                 dbName: "toys-store"
             }
         );
