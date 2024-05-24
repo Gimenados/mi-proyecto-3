@@ -74,8 +74,14 @@ export const createProduct = async (req, res) => {
 } 
 
 export const getProducts = async (req, res) => {
+
+    const { search } = req.query;
+
     try {
-        const products = await Products.find() 
+
+        const searchBy = search ? { name: new RegExp(search, "i") } : {}
+
+        const products = await Products.find({...searchBy, deletedAt: {$in: [null, undefined]}}) //"i" nos ahorramos errores colaterales con las minusculas y mayusculas 
         //Nuestra data del products
         res.json({
             products
