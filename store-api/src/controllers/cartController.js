@@ -2,6 +2,20 @@ import { Cart } from "../models/Cart.js";
 
 export const createCart = async (req, res) => {
   try {
+    console.log('Datos recibidos del frontend:', req.body);
+
+    const { items } = req.body;
+
+    if (!items || !Array.isArray(items)) {
+      return res.status(400).json({ ok: false, msg: 'Datos inválidos: los items son requeridos y deben ser un array.' });
+    }
+
+    for (const item of items) {
+      if (!item.product || !item.quantity) {
+        return res.status(400).json({ ok: false, msg: 'Datos inválidos: cada item debe tener un product y quantity.' });
+      }
+    }
+
     const newCart = await Cart.create(req.body);
 
     const cart = await Cart.findById(newCart._id)
@@ -21,6 +35,7 @@ export const createCart = async (req, res) => {
     });
   }
 };
+
 
 export const editCart = async (req, res) => {
     const {id} = req.params;
