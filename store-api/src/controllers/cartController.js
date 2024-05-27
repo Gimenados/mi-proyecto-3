@@ -1,32 +1,26 @@
-import { Cart } from "../models/Cart.js"
+import { Cart } from "../models/Cart.js";
 
 export const createCart = async (req, res) => {
-    try {
-        //Un carrito nuevo
-        const newCart = await Cart.create(req.body);
-        
-        const cart = await Cart.findById(newCart._id)
-                                .populate({
-                                    path: "items",
-                                    populate: {
-                                        path: "product"
-                                    }
-                                })
+  try {
+    const newCart = await Cart.create(req.body);
 
-        res.json({
-            ok: true,
-            cart
-        })
+    const cart = await Cart.findById(newCart._id)
+      .populate({
+        path: "items.product"
+      });
 
-    } catch (error) {
-        console.log("Ha habido un error al editar el producto.")
-        res.status(500)
-            .json({
-                ok: false,
-                msg: "Ha habido un error con el servidor"
-            })
-    }
-}
+    res.json({
+      ok: true,
+      cart
+    });
+  } catch (error) {
+    console.error("Ha habido un error al crear el carrito.", error);
+    res.status(500).json({
+      ok: false,
+      msg: "Ha habido un error con el servidor"
+    });
+  }
+};
 
 export const editCart = async (req, res) => {
     const {id} = req.params;
@@ -42,10 +36,7 @@ export const editCart = async (req, res) => {
 
         const newCart = await Cart.findByIdAndUpdate(id, req.body, {new: true})
                                 .populate({
-                                    path: "items",
-                                    populate: {
-                                        path: "product"
-                                    }
+                                    path: "items.product"
                                 })
 
         res.json({
@@ -69,10 +60,8 @@ export const getById = async (req, res) => {
     try {
         const cart = await Cart.findById(id)
                         .populate({
-                            path: "items",
-                            populate: {
-                                path: "product"
-                            }
+                            path: "items.product"
+
                         })
 
         res.json({
