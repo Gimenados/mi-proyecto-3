@@ -3,11 +3,9 @@ import { Images } from "../models/Images.js";
 export const getImage = async (req, res) => {
 
     const { idImage } = req.params;
-    // console.log(idImage)
 
     try {
         const image = await Images.findById(idImage)
-        console.log(image)
         // Búqueda por nombre:
         // const image = await Images.findOne({ filename: paramName})
         

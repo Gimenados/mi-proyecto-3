@@ -2,8 +2,7 @@ import { Cart } from "../models/Cart.js";
 
 export const createCart = async (req, res) => {
   try {
-    console.log('Datos recibidos del frontend:', req.body);
-
+    
     const { items } = req.body;
 
     if (!items || !Array.isArray(items)) {

@@ -6,7 +6,6 @@ export const createCheckoutPreference = async (req, res) => {
     try {
         const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
         const preference = new Preference(client);
-        console.log(body)
         const response = await preference.create({
             body: {
                 ...body,
@@ -20,7 +19,6 @@ export const createCheckoutPreference = async (req, res) => {
             preferenceId: response.id
         })
     } catch (error) {
-        console.error("Error al crear la preferencia:", error);
         res.status(500).send("Error con el servidor")
     }
 }

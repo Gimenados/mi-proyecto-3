@@ -42,6 +42,7 @@ export const createProduct = async (req, res) => {
             imgUrl: `${process.env.BASE_URL}/images/${image._id}`
         });
 
+        // El archivo temporal se elimina usando fs.rm
         fs.rm(`./temp/imgs/${file.filename}`, error => {
                 if (error) {
                     console.log("Lo sentimos, no hemos podido eliminar el archivo")
